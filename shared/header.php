@@ -1,57 +1,355 @@
 <?php
+
 require_once __DIR__ . '/auth.php';
 
-$basePath = $basePath ?? '.';
 $pageTitle = $pageTitle ?? 'SHOP.CO';
+
 $authUser = currentUser();
+
+/*
+|--------------------------------------------------------------------------
+| SHOP.CO PROJECT ROOT
+|--------------------------------------------------------------------------
+| The project is located at:
+| http://localhost/Final-Project/
+|--------------------------------------------------------------------------
+*/
+
+$siteRoot = '/Final-Project';
+
 ?>
-<div class="promo-bar">
-  <span>Sign up and get 20% off your first order</span>
-  <a href="<?= htmlspecialchars($basePath) ?>/auth/signup.php">Sign Up Now</a>
+
+<!-- =========================================================
+     PROMOTION BAR
+========================================================= -->
+
+<div class="promo-bar" id="promoBar">
+
+    <div class="promo-content">
+
+        <span>
+            Sign up and get 20% off your first order
+        </span>
+
+        <a href="<?= $siteRoot ?>/pages/signup.php">
+            Sign Up Now
+        </a>
+
+    </div>
+
+    <button
+        type="button"
+        class="promo-close"
+        id="promoClose"
+        aria-label="Close promotion"
+    >
+        ×
+    </button>
+
 </div>
 
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
 <header class="site-header">
-  <nav class="navbar">
-    <div class="container-fluid">
-      <a href="<?= htmlspecialchars($basePath) ?>/index.php" class="navbar-brand logo">SHOP.CO</a>
 
-      <div class="navbar-collapse" id="navbarMenu">
-        <ul class="navbar-nav nav-links">
-          <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($basePath) ?>/pages/products.php">Shop</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($basePath) ?>/pages/products.php?tag=sale">On Sale</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($basePath) ?>/pages/products.php?tag=new">New Arrivals</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars($basePath) ?>/pages/products.php">Brands</a></li>
-        </ul>
-      </div>
+    <nav class="navbar navbar-expand-lg">
 
-      <form class="search-box d-none d-md-flex" action="<?= htmlspecialchars($basePath) ?>/pages/products.php" method="get">
-        <i class="bi bi-search search-icon" aria-hidden="true"></i>
-        <input type="search" name="search" class="search-input" placeholder="Search for products..." aria-label="Search for products">
-      </form>
+        <div class="container-fluid">
 
-      <div class="header-icons">
-        <?php if ($authUser): ?>
-          <div class="dropdown account-dropdown">
-            <button class="icon-button account-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Account menu">
-              <i class="bi bi-person-check"></i>
-              <span class="account-name d-none d-md-inline"><?= htmlspecialchars($authUser['full_name']) ?></span>
+
+            <!-- MOBILE MENU BUTTON -->
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+
+                <span class="navbar-toggler-icon"></span>
+
             </button>
-            <ul class="dropdown-menu dropdown-menu-end account-menu">
-              <li><a class="dropdown-item" href="<?= htmlspecialchars($basePath) ?>/pages/profile.php"><i class="bi bi-person"></i> My Profile</a></li>
-              <?php if ($authUser['role'] === 'admin'): ?>
-                <li><a class="dropdown-item" href="<?= htmlspecialchars($basePath) ?>/dasboard/index.php"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-              <?php else: ?>
-                <li><a class="dropdown-item" href="<?= htmlspecialchars($basePath) ?>/pages/orders.php"><i class="bi bi-bag"></i> My Orders</a></li>
-              <?php endif; ?>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="<?= htmlspecialchars($basePath) ?>/auth/logout.php"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
-            </ul>
-          </div>
-        <?php else: ?>
-          <a href="<?= htmlspecialchars($basePath) ?>/auth/login.php" class="icon-button" aria-label="Account"><i class="bi bi-person"></i></a>
-        <?php endif; ?>
-        <a href="<?= htmlspecialchars($basePath) ?>/pages/cart.php" class="icon-button" aria-label="Shopping cart"><i class="bi bi-cart3"></i></a>
-      </div>
-    </div>
-  </nav>
+
+
+            <!-- LOGO -->
+
+            <a
+                href="<?= $siteRoot ?>/index.php"
+                class="logo"
+            >
+                SHOP.CO
+            </a>
+
+
+            <!-- NAVBAR CONTENT -->
+
+            <div
+                class="collapse navbar-collapse"
+                id="mainNavbar"
+            >
+
+
+                <!-- NAVIGATION -->
+
+                <ul class="navbar-nav nav-links">
+
+
+                    <!-- HOME -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="<?= $siteRoot ?>/index.php"
+                        >
+                            Home
+                        </a>
+
+                    </li>
+
+
+                    <!-- SHOP -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="<?= $siteRoot ?>/pages/products.php"
+                        >
+                            Shop
+                        </a>
+
+                    </li>
+
+
+                    <!-- ON SALE -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="<?= $siteRoot ?>/pages/products.php?tag=sale"
+                        >
+                            On Sale
+                        </a>
+
+                    </li>
+
+
+                    <!-- NEW ARRIVALS -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="<?= $siteRoot ?>/pages/products.php?tag=new"
+                        >
+                            New Arrivals
+                        </a>
+
+                    </li>
+
+
+                    <!-- BRANDS -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="<?= $siteRoot ?>/pages/products.php"
+                        >
+                            Brands
+                        </a>
+
+                    </li>
+
+
+                    <!-- ABOUT -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="<?= $siteRoot ?>/pages/about.php"
+                        >
+                            About
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+    <a
+        class="nav-link"
+        href="<?= $siteRoot ?>/pages/team.php"
+    >
+        Team
+    </a>
+
+</li>
+
+
+                    <!-- CONTACT -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="<?= $siteRoot ?>/pages/contact.php"
+                        >
+                            Contact
+                        </a>
+
+                    </li>
+
+
+                </ul>
+
+
+                <!-- SEARCH -->
+
+                <form
+                    action="<?= $siteRoot ?>/pages/products.php"
+                    method="get"
+                    class="search-box"
+                >
+
+                    <i
+                        class="bi bi-search search-icon"
+                        aria-hidden="true"
+                    ></i>
+
+                    <input
+                        type="search"
+                        name="search"
+                        class="search-input"
+                        placeholder="Search for products..."
+                        aria-label="Search for products"
+                    >
+
+                </form>
+
+
+                <!-- USER / CART -->
+
+                <div class="header-icons">
+
+
+                    <?php if ($authUser): ?>
+
+
+                        <!-- PROFILE -->
+
+                        <a
+                            href="<?= $siteRoot ?>/pages/profile.php"
+                            class="icon-button"
+                            title="Profile"
+                            aria-label="Profile"
+                        >
+
+                            <i class="bi bi-person"></i>
+
+                        </a>
+
+
+                        <?php if (($authUser['role'] ?? '') === 'admin'): ?>
+
+
+                            <!-- DASHBOARD -->
+
+                            <a
+                                href="<?= $siteRoot ?>/dasboard/index.php"
+                                class="icon-button"
+                                title="Dashboard"
+                                aria-label="Dashboard"
+                            >
+
+                                <i class="bi bi-speedometer2"></i>
+
+                            </a>
+
+
+                        <?php else: ?>
+
+
+                            <!-- ORDERS -->
+
+                            <a
+                                href="<?= $siteRoot ?>/pages/orders.php"
+                                class="icon-button"
+                                title="My Orders"
+                                aria-label="My Orders"
+                            >
+
+                                <i class="bi bi-bag"></i>
+
+                            </a>
+
+
+                        <?php endif; ?>
+
+
+                        <!-- LOGOUT -->
+
+                        <a
+                            href="<?= $siteRoot ?>/auth/logout.php"
+                            class="icon-button"
+                            title="Logout"
+                            aria-label="Logout"
+                        >
+
+                            <i class="bi bi-box-arrow-right"></i>
+
+                        </a>
+
+
+                    <?php else: ?>
+
+
+                        <!-- LOGIN -->
+
+                        <a
+                            href="<?= $siteRoot ?>/auth/login.php"
+                            class="icon-button"
+                            title="Login"
+                            aria-label="Login"
+                        >
+
+                            <i class="bi bi-person"></i>
+
+                        </a>
+
+
+                    <?php endif; ?>
+
+
+                    <!-- CART -->
+
+                    <a
+                        href="<?= $siteRoot ?>/pages/cart.php"
+                        class="icon-button"
+                        title="Shopping Cart"
+                        aria-label="Shopping Cart"
+                    >
+
+                        <i class="bi bi-cart3"></i>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </nav>
+
 </header>
