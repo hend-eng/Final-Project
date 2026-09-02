@@ -1,0 +1,229 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Team Members</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Dashboard CSS -->
+    <link
+        rel="stylesheet"
+        href="/assets/css/dashboard.css"
+    >
+
+    <style>
+
+        .team-content {
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .team-title {
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .team-table {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .team-table th {
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .team-table td {
+            vertical-align: middle;
+        }
+
+        .member-name {
+            font-weight: 600;
+        }
+
+        .role-badge {
+            font-size: 13px;
+        }
+
+        .branch {
+            font-family: monospace;
+        }
+
+        @media (max-width: 767px) {
+
+            .team-content {
+                padding: 20px 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <?php include __DIR__ . '/dash-shared/sidebar.php'; ?>
+
+
+    <!-- ================= TEAM CONTENT ================= -->
+
+    <div class="team-content">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <h2 class="team-title mb-0">
+                Team Members
+            </h2>
+
+        </div>
+
+
+        <div class="table-responsive team-table">
+
+            <table class="table table-bordered table-hover text-center align-middle mb-0">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>#</th>
+                        <th>Member Name</th>
+                        <th>Role</th>
+                        <th>Task</th>
+                        <th>Branch</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <tr>
+                        <td>1</td>
+                        <td class="member-name">Kenzy Ahmed</td>
+                        <td>
+                            <span class="badge text-bg-primary role-badge">
+                                Frontend
+                            </span>
+                        </td>
+                        <td>Home & Products</td>
+                        <td class="branch">member-1</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>2</td>
+                        <td class="member-name">Sama </td>
+                        <td>
+                            <span class="badge text-bg-success role-badge">
+                                Frontend / Backend
+                            </span>
+                        </td>
+                        <td>Database & Authentication</td>
+                        <td class="branch">member-2</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>3</td>
+                        <td class="member-name">Sara Mohamed</td>
+                        <td>
+                            <span class="badge text-bg-success role-badge">
+                                Backend
+                            </span>
+                        </td>
+                        <td>Database & Authentication</td>
+                        <td class="branch">member-3</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>4</td>
+                        <td class="member-name">Hind Hussein</td>
+                        <td>
+                            <span class="badge text-bg-warning role-badge">
+                                Backend / Admin
+                            </span>
+                        </td>
+                        <td>Categories, Brands & Products CRUD</td>
+                        <td class="branch">mem_4</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>5</td>
+                        <td class="member-name">Reem Yasser</td>
+                        <td>
+                            <span class="badge text-bg-success role-badge">
+                                Backend
+                            </span>
+                        </td>
+                        <td>Orders & Payment</td>
+                        <td class="branch">mem_4</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>6</td>
+                        <td class="member-name">Moataz Hussein</td>
+                        <td>
+                            <span class="badge text-bg-primary role-badge">
+                                Frontend
+                            </span>
+                        </td>
+                        <td>UI & Dashboard</td>
+                        <td class="branch">member-6</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+        
+<div style="text-align: center; margin-top: 20px;">
+
+    <button
+        onclick="history.back()"
+        style="
+            width: 100px;
+            height: 40px;
+            background-color: brown;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        ">
+        Back
+    </button>
+
+</div>
+
+
+    </div>
+
+
+
+
+
+</body>
+
+</html>
+
