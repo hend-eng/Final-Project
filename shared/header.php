@@ -6,22 +6,19 @@ $pageTitle = $pageTitle ?? 'SHOP.CO';
 
 $authUser = currentUser();
 
-/*
-|--------------------------------------------------------------------------
-| SHOP.CO PROJECT ROOT
-|--------------------------------------------------------------------------
-| The project is located at:
-| http://localhost/Final-Project/
-|--------------------------------------------------------------------------
-*/
+$scriptDir = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
 
-$siteRoot = '/Final-Project';
+$siteRoot = preg_replace(
+    '#/(pages|auth|dasboard|shared)$#',
+    '',
+    $scriptDir
+);
+
+if ($siteRoot === '/') {
+    $siteRoot = '';
+}
 
 ?>
-
-<!-- =========================================================
-     PROMOTION BAR
-========================================================= -->
 
 <div class="promo-bar" id="promoBar">
 
@@ -31,7 +28,7 @@ $siteRoot = '/Final-Project';
             Sign up and get 20% off your first order
         </span>
 
-        <a href="<?= $siteRoot ?>/pages/signup.php">
+        <a href="<?= $siteRoot ?>/auth/signup.php">
             Sign Up Now
         </a>
 
@@ -42,25 +39,18 @@ $siteRoot = '/Final-Project';
         class="promo-close"
         id="promoClose"
         aria-label="Close promotion"
+        onclick="document.getElementById('promoBar').style.display='none';"
     >
         ×
     </button>
 
 </div>
 
-
-<!-- =========================================================
-     NAVBAR
-========================================================= -->
-
 <header class="site-header">
 
     <nav class="navbar navbar-expand-lg">
 
         <div class="container-fluid">
-
-
-            <!-- MOBILE MENU BUTTON -->
 
             <button
                 class="navbar-toggler"
@@ -76,9 +66,6 @@ $siteRoot = '/Final-Project';
 
             </button>
 
-
-            <!-- LOGO -->
-
             <a
                 href="<?= $siteRoot ?>/index.php"
                 class="logo"
@@ -86,133 +73,86 @@ $siteRoot = '/Final-Project';
                 SHOP.CO
             </a>
 
-
-            <!-- NAVBAR CONTENT -->
-
             <div
                 class="collapse navbar-collapse"
                 id="mainNavbar"
             >
 
-
-                <!-- NAVIGATION -->
-
                 <ul class="navbar-nav nav-links">
 
-
-                    <!-- HOME -->
-
                     <li class="nav-item">
-
                         <a
                             class="nav-link"
                             href="<?= $siteRoot ?>/index.php"
                         >
                             Home
                         </a>
-
                     </li>
 
-
-                    <!-- SHOP -->
-
                     <li class="nav-item">
-
                         <a
                             class="nav-link"
                             href="<?= $siteRoot ?>/pages/products.php"
                         >
                             Shop
                         </a>
-
                     </li>
 
-
-                    <!-- ON SALE -->
-
                     <li class="nav-item">
-
                         <a
                             class="nav-link"
                             href="<?= $siteRoot ?>/pages/products.php?tag=sale"
                         >
                             On Sale
                         </a>
-
                     </li>
 
-
-                    <!-- NEW ARRIVALS -->
-
                     <li class="nav-item">
-
                         <a
                             class="nav-link"
                             href="<?= $siteRoot ?>/pages/products.php?tag=new"
                         >
                             New Arrivals
                         </a>
-
                     </li>
 
-
-                    <!-- BRANDS -->
-
                     <li class="nav-item">
-
                         <a
                             class="nav-link"
-                            href="<?= $siteRoot ?>/pages/products.php"
+                            href="<?= $siteRoot ?>/pages/brands.php"
                         >
                             Brands
                         </a>
-
                     </li>
 
-
-                    <!-- ABOUT -->
-
                     <li class="nav-item">
-
                         <a
                             class="nav-link"
                             href="<?= $siteRoot ?>/pages/about.php"
                         >
                             About
                         </a>
-
                     </li>
 
                     <li class="nav-item">
-
-    <a
-        class="nav-link"
-        href="<?= $siteRoot ?>/pages/team.php"
-    >
-        Team
-    </a>
-
-</li>
-
-
-                    <!-- CONTACT -->
+                        <a
+                            class="nav-link"
+                            href="<?= $siteRoot ?>/pages/team.php"
+                        >
+                            Team
+                        </a>
+                    </li>
 
                     <li class="nav-item">
-
                         <a
                             class="nav-link"
                             href="<?= $siteRoot ?>/pages/contact.php"
                         >
                             Contact
                         </a>
-
                     </li>
 
-
                 </ul>
-
-
-                <!-- SEARCH -->
 
                 <form
                     action="<?= $siteRoot ?>/pages/products.php"
@@ -235,16 +175,9 @@ $siteRoot = '/Final-Project';
 
                 </form>
 
-
-                <!-- USER / CART -->
-
                 <div class="header-icons">
 
-
                     <?php if ($authUser): ?>
-
-
-                        <!-- PROFILE -->
 
                         <a
                             href="<?= $siteRoot ?>/pages/profile.php"
@@ -252,16 +185,10 @@ $siteRoot = '/Final-Project';
                             title="Profile"
                             aria-label="Profile"
                         >
-
                             <i class="bi bi-person"></i>
-
                         </a>
 
-
                         <?php if (($authUser['role'] ?? '') === 'admin'): ?>
-
-
-                            <!-- DASHBOARD -->
 
                             <a
                                 href="<?= $siteRoot ?>/dasboard/index.php"
@@ -269,16 +196,10 @@ $siteRoot = '/Final-Project';
                                 title="Dashboard"
                                 aria-label="Dashboard"
                             >
-
                                 <i class="bi bi-speedometer2"></i>
-
                             </a>
 
-
                         <?php else: ?>
-
-
-                            <!-- ORDERS -->
 
                             <a
                                 href="<?= $siteRoot ?>/pages/orders.php"
@@ -286,16 +207,10 @@ $siteRoot = '/Final-Project';
                                 title="My Orders"
                                 aria-label="My Orders"
                             >
-
                                 <i class="bi bi-bag"></i>
-
                             </a>
 
-
                         <?php endif; ?>
-
-
-                        <!-- LOGOUT -->
 
                         <a
                             href="<?= $siteRoot ?>/auth/logout.php"
@@ -303,16 +218,10 @@ $siteRoot = '/Final-Project';
                             title="Logout"
                             aria-label="Logout"
                         >
-
                             <i class="bi bi-box-arrow-right"></i>
-
                         </a>
 
-
                     <?php else: ?>
-
-
-                        <!-- LOGIN -->
 
                         <a
                             href="<?= $siteRoot ?>/auth/login.php"
@@ -320,16 +229,10 @@ $siteRoot = '/Final-Project';
                             title="Login"
                             aria-label="Login"
                         >
-
                             <i class="bi bi-person"></i>
-
                         </a>
 
-
                     <?php endif; ?>
-
-
-                    <!-- CART -->
 
                     <a
                         href="<?= $siteRoot ?>/pages/cart.php"
@@ -337,14 +240,10 @@ $siteRoot = '/Final-Project';
                         title="Shopping Cart"
                         aria-label="Shopping Cart"
                     >
-
                         <i class="bi bi-cart3"></i>
-
                     </a>
 
-
                 </div>
-
 
             </div>
 

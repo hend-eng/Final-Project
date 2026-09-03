@@ -2,10 +2,29 @@
 
 $pageTitle = 'About Us - SHOP.CO';
 
+$projectPath = realpath(__DIR__ . '/..');
+$documentRoot = realpath($_SERVER['DOCUMENT_ROOT'] ?? '');
+
+$siteRoot = '';
+
+if ($projectPath && $documentRoot) {
+
+    $projectPath = str_replace('\\', '/', $projectPath);
+    $documentRoot = str_replace('\\', '/', $documentRoot);
+
+    if (strpos($projectPath, $documentRoot) === 0) {
+        $siteRoot = substr(
+            $projectPath,
+            strlen($documentRoot)
+        );
+    }
+}
+
+$siteRoot = rtrim($siteRoot, '/');
+
 ?>
 
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -18,48 +37,31 @@ $pageTitle = 'About Us - SHOP.CO';
     >
 
     <title>
-        <?= htmlspecialchars($pageTitle) ?>
+        <?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?>
     </title>
-
-
-    <!-- Bootstrap -->
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
-
-    <!-- Bootstrap Icons -->
-
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     >
 
-
-    <!-- Main CSS -->
-
     <link
         rel="stylesheet"
-        href="../assets/css/style.css"
+        href="<?= $siteRoot ?>/assets/css/style.css"
     >
 
 </head>
 
-
 <body>
-
 
 <?php require __DIR__ . '/../shared/header.php'; ?>
 
-
 <main class="about-page">
-
-
-    <!-- =====================================================
-         ABOUT HERO
-    ====================================================== -->
 
     <section class="about-hero">
 
@@ -67,7 +69,7 @@ $pageTitle = 'About Us - SHOP.CO';
 
             <div class="about-breadcrumb">
 
-                <a href="/Final-Project/index.php">
+                <a href="<?= $siteRoot ?>/index.php">
                     Home
                 </a>
 
@@ -82,26 +84,73 @@ $pageTitle = 'About Us - SHOP.CO';
 
             </div>
 
+            <div
+                style="
+                    position: relative;
+                    min-height: 480px;
+                    width: 100%;
+                "
+            >
 
-            <div class="about-hero-content">
+                <div
+                    style="
+                        position: absolute;
+                        left: 0;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        width: 55%;
+                        text-align: left;
+                        z-index: 2;
+                    "
+                >
 
-                <span class="about-label">
-                    ABOUT SHOP.CO
-                </span>
+                    <span class="about-label">
+                        ABOUT SHOP.CO
+                    </span>
 
+                    <h1>
+                        Style that speaks
+                        <br>
+                        for you.
+                    </h1>
 
-                <h1>
-                    Style that speaks
-                    <br>
-                    for you.
-                </h1>
+                    <p>
+                        SHOP.CO is a fashion destination created
+                        for people who want to express their
+                        personality through what they wear.
+                    </p>
 
+                </div>
 
-                <p>
-                    SHOP.CO is a fashion destination created
-                    for people who want to express their
-                    personality through what they wear.
-                </p>
+                <div
+                    style="
+                        position: absolute;
+                        right: 5%;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        width: 400px;
+                        height: 400px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        z-index: 1;
+                    "
+                >
+
+                    <img
+                        src="<?= $siteRoot ?>/assets/images/About.jpeg"
+                        alt="About SHOP.CO"
+                        style="
+                            display: block;
+                            width: 250px;
+                            height: 250px;
+                            max-width: 250px;
+                            max-height: 250px;
+                            object-fit: contain;
+                        "
+                    >
+
+                </div>
 
             </div>
 
@@ -110,17 +159,11 @@ $pageTitle = 'About Us - SHOP.CO';
     </section>
 
 
-
-    <!-- =====================================================
-         OUR STORY
-    ====================================================== -->
-
     <section class="about-story">
 
         <div class="container">
 
             <div class="row align-items-center g-5">
-
 
                 <div class="col-lg-6">
 
@@ -146,7 +189,6 @@ $pageTitle = 'About Us - SHOP.CO';
 
                 </div>
 
-
                 <div class="col-lg-6">
 
                     <div class="about-content">
@@ -155,13 +197,11 @@ $pageTitle = 'About Us - SHOP.CO';
                             OUR STORY
                         </span>
 
-
                         <h2>
                             Fashion made
                             <br>
                             simple.
                         </h2>
-
 
                         <p>
                             SHOP.CO was created with one simple
@@ -169,14 +209,12 @@ $pageTitle = 'About Us - SHOP.CO';
                             easy, enjoyable, and inspiring.
                         </p>
 
-
                         <p>
                             We bring together carefully selected
                             styles so you can discover pieces
                             that match your personality and make
                             you feel confident every day.
                         </p>
-
 
                         <p>
                             From everyday essentials to statement
@@ -196,11 +234,6 @@ $pageTitle = 'About Us - SHOP.CO';
     </section>
 
 
-
-    <!-- =====================================================
-         OUR MISSION
-    ====================================================== -->
-
     <section class="about-mission">
 
         <div class="container">
@@ -211,13 +244,11 @@ $pageTitle = 'About Us - SHOP.CO';
                     OUR MISSION
                 </span>
 
-
                 <h2>
                     We believe style
                     <br>
                     should be yours.
                 </h2>
-
 
                 <p>
                     Our mission is to make fashion more
@@ -233,11 +264,6 @@ $pageTitle = 'About Us - SHOP.CO';
     </section>
 
 
-
-    <!-- =====================================================
-         WHY SHOP.CO
-    ====================================================== -->
-
     <section class="about-values">
 
         <div class="container">
@@ -248,7 +274,6 @@ $pageTitle = 'About Us - SHOP.CO';
                     WHY SHOP.CO
                 </span>
 
-
                 <h2>
                     Everything you need
                     <br>
@@ -257,25 +282,19 @@ $pageTitle = 'About Us - SHOP.CO';
 
             </div>
 
-
             <div class="row g-4">
-
 
                 <div class="col-md-4">
 
                     <article class="about-value-card">
 
                         <div class="about-value-icon">
-
                             <i class="bi bi-stars"></i>
-
                         </div>
-
 
                         <h3>
                             Curated Styles
                         </h3>
-
 
                         <p>
                             Discover a collection of styles
@@ -287,22 +306,17 @@ $pageTitle = 'About Us - SHOP.CO';
 
                 </div>
 
-
                 <div class="col-md-4">
 
                     <article class="about-value-card">
 
                         <div class="about-value-icon">
-
                             <i class="bi bi-bag-check"></i>
-
                         </div>
-
 
                         <h3>
                             Easy Shopping
                         </h3>
-
 
                         <p>
                             Browse, search, filter, and discover
@@ -314,22 +328,17 @@ $pageTitle = 'About Us - SHOP.CO';
 
                 </div>
 
-
                 <div class="col-md-4">
 
                     <article class="about-value-card">
 
                         <div class="about-value-icon">
-
                             <i class="bi bi-heart"></i>
-
                         </div>
-
 
                         <h3>
                             Made for You
                         </h3>
-
 
                         <p>
                             Whether you prefer timeless basics
@@ -341,7 +350,6 @@ $pageTitle = 'About Us - SHOP.CO';
 
                 </div>
 
-
             </div>
 
         </div>
@@ -349,17 +357,11 @@ $pageTitle = 'About Us - SHOP.CO';
     </section>
 
 
-
-    <!-- =====================================================
-         OUR NUMBERS
-    ====================================================== -->
-
     <section class="about-stats">
 
         <div class="container">
 
             <div class="row text-center g-4">
-
 
                 <div class="col-6 col-md-3">
 
@@ -381,7 +383,6 @@ $pageTitle = 'About Us - SHOP.CO';
 
                 </div>
 
-
                 <div class="col-6 col-md-3">
 
                     <div class="about-stat">
@@ -401,7 +402,6 @@ $pageTitle = 'About Us - SHOP.CO';
                     </div>
 
                 </div>
-
 
                 <div class="col-6 col-md-3">
 
@@ -423,7 +423,6 @@ $pageTitle = 'About Us - SHOP.CO';
 
                 </div>
 
-
                 <div class="col-6 col-md-3">
 
                     <div class="about-stat">
@@ -444,18 +443,12 @@ $pageTitle = 'About Us - SHOP.CO';
 
                 </div>
 
-
             </div>
 
         </div>
 
     </section>
 
-
-
-    <!-- =====================================================
-         CTA
-    ====================================================== -->
 
     <section class="about-cta">
 
@@ -467,22 +460,19 @@ $pageTitle = 'About Us - SHOP.CO';
                     FIND YOUR STYLE
                 </span>
 
-
                 <h2>
                     Ready to find
                     <br>
                     your next favorite look?
                 </h2>
 
-
                 <p>
                     Explore our collection and discover
                     something made for your style.
                 </p>
 
-
                 <a
-                    href="/Final-Project/pages/products.php"
+                    href="<?= $siteRoot ?>/pages/products.php"
                     class="about-cta-button"
                 >
                     Shop Now
@@ -494,16 +484,9 @@ $pageTitle = 'About Us - SHOP.CO';
 
     </section>
 
-
 </main>
 
-
 <?php require __DIR__ . '/../shared/footer.php'; ?>
-
-
-<!-- =====================================================
-     ABOUT COUNTERS
-====================================================== -->
 
 <script>
 
@@ -515,11 +498,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const statsSection =
         document.querySelector('.about-stats');
 
-
     if (!counters.length || !statsSection) {
         return;
     }
-
 
     function animateCounter(counter) {
 
@@ -534,7 +515,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const startTime =
             performance.now();
 
-
         function updateCounter(currentTime) {
 
             const elapsed =
@@ -543,18 +523,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const progress =
                 Math.min(elapsed / duration, 1);
 
-
             const easedProgress =
                 1 - Math.pow(1 - progress, 3);
-
 
             const currentValue =
                 Math.floor(target * easedProgress);
 
-
             counter.textContent =
                 currentValue.toLocaleString() + suffix;
-
 
             if (progress < 1) {
 
@@ -569,11 +545,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         }
 
-
         requestAnimationFrame(updateCounter);
-
     }
-
 
     const observer =
         new IntersectionObserver(
@@ -584,11 +557,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (entry.isIntersecting) {
 
                         counters.forEach(function (counter) {
-
                             animateCounter(counter);
-
                         });
-
 
                         observerInstance.unobserve(
                             entry.target
@@ -604,13 +574,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         );
 
-
     observer.observe(statsSection);
 
 });
 
 </script>
-
 
 </body>
 

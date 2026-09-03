@@ -1,6 +1,26 @@
-<!-- =========================================================
-     FOOTER
-========================================================= -->
+<?php
+
+$projectPath = realpath(__DIR__ . '/..');
+$documentRoot = realpath($_SERVER['DOCUMENT_ROOT'] ?? '');
+
+$siteRoot = '';
+
+if ($projectPath && $documentRoot) {
+
+    $projectPath = str_replace('\\', '/', $projectPath);
+    $documentRoot = str_replace('\\', '/', $documentRoot);
+
+    if (strpos($projectPath, $documentRoot) === 0) {
+        $siteRoot = substr(
+            $projectPath,
+            strlen($documentRoot)
+        );
+    }
+}
+
+$siteRoot = rtrim($siteRoot, '/');
+
+?>
 
 <footer class="site-footer">
 
@@ -8,91 +28,66 @@
 
         <div class="footer-main">
 
-
-            <!-- =================================================
-                 BRAND
-            ================================================== -->
-
             <div class="footer-brand">
 
                 <a
-                    href="/Final-Project/index.php"
+                    href="<?= $siteRoot ?>/index.php"
                     class="footer-logo"
                 >
                     SHOP.CO
                 </a>
-
 
                 <p>
                     We have clothes that suit your style
                     and which you're proud to wear.
                 </p>
 
+                <div class="footer-socials">
 
-             <!-- SOCIAL MEDIA -->
+                    <a
+                        href="https://x.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="X"
+                        class="footer-social"
+                    >
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
 
-<div class="footer-socials">
+                    <a
+                        href="https://www.facebook.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Facebook"
+                        class="footer-social"
+                    >
+                        <i class="bi bi-facebook"></i>
+                    </a>
 
-    <!-- X -->
+                    <a
+                        href="https://www.instagram.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram"
+                        class="footer-social"
+                    >
+                        <i class="bi bi-instagram"></i>
+                    </a>
 
-    <a
-        href="https://x.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="X"
-        class="footer-social"
-    >
-        <i class="bi bi-twitter-x"></i>
-    </a>
+                    <a
+                        href="https://github.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="GitHub"
+                        class="footer-social"
+                    >
+                        <i class="bi bi-github"></i>
+                    </a>
 
-
-    <!-- FACEBOOK -->
-
-    <a
-        href="https://www.facebook.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Facebook"
-        class="footer-social"
-    >
-        <i class="bi bi-facebook"></i>
-    </a>
-
-
-    <!-- INSTAGRAM -->
-
-    <a
-        href="https://www.instagram.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Instagram"
-        class="footer-social"
-    >
-        <i class="bi bi-instagram"></i>
-    </a>
-
-
-    <!-- GITHUB -->
-
-    <a
-        href="https://github.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="GitHub"
-        class="footer-social"
-    >
-        <i class="bi bi-github"></i>
-    </a>
-
-</div>
+                </div>
 
             </div>
 
-
-
-            <!-- =================================================
-                 SHOP
-            ================================================== -->
 
             <div class="footer-column">
 
@@ -100,25 +95,22 @@
                     SHOP
                 </h3>
 
-
                 <ul>
 
                     <li>
-                        <a href="/Final-Project/pages/products.php">
+                        <a href="<?= $siteRoot ?>/pages/products.php">
                             All Products
                         </a>
                     </li>
 
-
                     <li>
-                        <a href="/Final-Project/pages/products.php?tag=new">
+                        <a href="<?= $siteRoot ?>/pages/products.php?tag=new">
                             New Arrivals
                         </a>
                     </li>
 
-
                     <li>
-                        <a href="/Final-Project/pages/products.php?tag=sale">
+                        <a href="<?= $siteRoot ?>/pages/products.php?tag=sale">
                             On Sale
                         </a>
                     </li>
@@ -128,49 +120,36 @@
             </div>
 
 
-
-            <!-- =================================================
-                 COMPANY
-            ================================================== -->
-
             <div class="footer-column">
 
                 <h3>
                     COMPANY
                 </h3>
 
+                <ul>
 
-               <ul>
+                    <li>
+                        <a href="<?= $siteRoot ?>/pages/about.php">
+                            About Us
+                        </a>
+                    </li>
 
-    <li>
-        <a href="/Final-Project/pages/about.php">
-            About Us
-        </a>
-    </li>
+                    <li>
+                        <a href="<?= $siteRoot ?>/pages/team.php">
+                            Our Team
+                        </a>
+                    </li>
 
+                    <li>
+                        <a href="<?= $siteRoot ?>/pages/contact.php">
+                            Contact Us
+                        </a>
+                    </li>
 
-    <li>
-        <a href="/Final-Project/pages/team.php">
-            Our Team
-        </a>
-    </li>
-
-
-    <li>
-        <a href="/Final-Project/pages/contact.php">
-            Contact Us
-        </a>
-    </li>
-
-</ul>
+                </ul>
 
             </div>
 
-
-
-            <!-- =================================================
-                 ACCOUNT
-            ================================================== -->
 
             <div class="footer-column">
 
@@ -178,32 +157,28 @@
                     ACCOUNT
                 </h3>
 
-
                 <ul>
 
                     <li>
-                        <a href="/Final-Project/auth/login.php">
+                        <a href="<?= $siteRoot ?>/auth/login.php">
                             Login
                         </a>
                     </li>
 
-
                     <li>
-                        <a href="/Final-Project/pages/profile.php">
+                        <a href="<?= $siteRoot ?>/pages/profile.php">
                             My Profile
                         </a>
                     </li>
 
-
                     <li>
-                        <a href="/Final-Project/pages/orders.php">
+                        <a href="<?= $siteRoot ?>/pages/orders.php">
                             My Orders
                         </a>
                     </li>
 
-
                     <li>
-                        <a href="/Final-Project/pages/cart.php">
+                        <a href="<?= $siteRoot ?>/pages/cart.php">
                             Cart
                         </a>
                     </li>
@@ -213,29 +188,22 @@
             </div>
 
 
-
-            <!-- =================================================
-                 HELP
-            ================================================== -->
-
             <div class="footer-column">
 
                 <h3>
                     HELP
                 </h3>
 
-
                 <ul>
 
                     <li>
-                        <a href="/Final-Project/pages/contact.php">
+                        <a href="<?= $siteRoot ?>/pages/contact.php">
                             Customer Support
                         </a>
                     </li>
 
-
                     <li>
-                        <a href="/Final-Project/pages/contact.php#contactForm">
+                        <a href="<?= $siteRoot ?>/pages/contact.php#contactForm">
                             Returns & Exchanges
                         </a>
                     </li>
@@ -244,16 +212,10 @@
 
             </div>
 
-
         </div>
 
     </div>
 
-
-
-    <!-- =====================================================
-         FOOTER BOTTOM
-    ====================================================== -->
 
     <div class="footer-bottom">
 
