@@ -74,19 +74,25 @@ function sidebarActive(string $section, string $currentFile, string $currentFold
         </li>
 
        
-        <li>
-            <a href="#" onclick="return false;" title="Orders page not created yet">
-                <span>🛒</span>
-                <span>Orders</span>
-            </a>
-        </li>
+       <li>
+    <a href="<?= $dashboardBase ?>/orders/index.php"
+       class="<?= sidebarActive('orders', $currentFile, $currentFolder) ?>">
 
-        <li>
-            <a href="#" onclick="return false;" title="Clients page not created yet">
-                <span>👤</span>
-                <span>Clients</span>
-            </a>
-        </li>
+        <span>🛒</span>
+        <span>Orders</span>
+
+    </a>
+</li>
+
+<li>
+    <a href="<?= $dashboardBase ?>/clients/index.php"
+       class="<?= sidebarActive('clients', $currentFile, $currentFolder) ?>">
+
+        <span>👤</span>
+        <span>Clients</span>
+
+    </a>
+</li>
 
 
     </ul>

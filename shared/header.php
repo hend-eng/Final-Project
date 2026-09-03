@@ -6,22 +6,27 @@ $pageTitle = $pageTitle ?? 'SHOP.CO';
 
 $authUser = currentUser();
 
-/*
-|--------------------------------------------------------------------------
-| SHOP.CO PROJECT ROOT
-|--------------------------------------------------------------------------
-| The project is located at:
-| http://localhost/Final-Project/
-|--------------------------------------------------------------------------
-*/
+$scriptPath = str_replace(
+    '\\',
+    '/',
+    $_SERVER['SCRIPT_NAME'] ?? ''
+);
 
-$siteRoot = '/Final-Project';
+$scriptDirectory = dirname($scriptPath);
+
+$siteRoot = preg_replace(
+    '#/(pages|auth|dasboard|shared)$#',
+    '',
+    $scriptDirectory
+);
+
+if ($siteRoot === '.' || $siteRoot === '/') {
+    $siteRoot = '';
+}
+
+$siteRoot = rtrim($siteRoot, '/');
 
 ?>
-
-<!-- =========================================================
-     PROMOTION BAR
-========================================================= -->
 
 <div class="promo-bar" id="promoBar">
 
@@ -31,7 +36,9 @@ $siteRoot = '/Final-Project';
             Sign up and get 20% off your first order
         </span>
 
-        <a href="<?= $siteRoot ?>/pages/signup.php">
+        <a
+            href="<?= htmlspecialchars($siteRoot . '/auth/signup.php', ENT_QUOTES, 'UTF-8') ?>"
+        >
             Sign Up Now
         </a>
 
@@ -49,18 +56,11 @@ $siteRoot = '/Final-Project';
 </div>
 
 
-<!-- =========================================================
-     NAVBAR
-========================================================= -->
-
 <header class="site-header">
 
     <nav class="navbar navbar-expand-lg">
 
         <div class="container-fluid">
-
-
-            <!-- MOBILE MENU BUTTON -->
 
             <button
                 class="navbar-toggler"
@@ -71,151 +71,109 @@ $siteRoot = '/Final-Project';
                 aria-expanded="false"
                 aria-label="Toggle navigation"
             >
-
                 <span class="navbar-toggler-icon"></span>
-
             </button>
 
 
-            <!-- LOGO -->
-
             <a
-                href="<?= $siteRoot ?>/index.php"
+                href="<?= htmlspecialchars($siteRoot . '/index.php', ENT_QUOTES, 'UTF-8') ?>"
                 class="logo"
             >
                 SHOP.CO
             </a>
 
 
-            <!-- NAVBAR CONTENT -->
-
             <div
                 class="collapse navbar-collapse"
                 id="mainNavbar"
             >
 
-
-                <!-- NAVIGATION -->
-
                 <ul class="navbar-nav nav-links">
 
-
-                    <!-- HOME -->
-
                     <li class="nav-item">
-
                         <a
                             class="nav-link"
-                            href="<?= $siteRoot ?>/index.php"
+                            href="<?= htmlspecialchars($siteRoot . '/index.php', ENT_QUOTES, 'UTF-8') ?>"
                         >
                             Home
                         </a>
-
                     </li>
 
 
-                    <!-- SHOP -->
-
                     <li class="nav-item">
-
                         <a
                             class="nav-link"
-                            href="<?= $siteRoot ?>/pages/products.php"
+                            href="<?= htmlspecialchars($siteRoot . '/pages/products.php', ENT_QUOTES, 'UTF-8') ?>"
                         >
                             Shop
                         </a>
-
                     </li>
 
 
-                    <!-- ON SALE -->
-
                     <li class="nav-item">
-
                         <a
                             class="nav-link"
-                            href="<?= $siteRoot ?>/pages/products.php?tag=sale"
+                            href="<?= htmlspecialchars($siteRoot . '/pages/products.php?tag=sale', ENT_QUOTES, 'UTF-8') ?>"
                         >
                             On Sale
                         </a>
-
                     </li>
 
 
-                    <!-- NEW ARRIVALS -->
-
                     <li class="nav-item">
-
                         <a
                             class="nav-link"
-                            href="<?= $siteRoot ?>/pages/products.php?tag=new"
+                            href="<?= htmlspecialchars($siteRoot . '/pages/products.php?tag=new', ENT_QUOTES, 'UTF-8') ?>"
                         >
                             New Arrivals
                         </a>
-
                     </li>
 
 
-                    <!-- BRANDS -->
-
                     <li class="nav-item">
-
                         <a
                             class="nav-link"
-                            href="<?= $siteRoot ?>/pages/products.php"
+                            href="<?= htmlspecialchars($siteRoot . '/pages/brands.php', ENT_QUOTES, 'UTF-8') ?>"
                         >
                             Brands
                         </a>
-
                     </li>
 
 
-                    <!-- ABOUT -->
-
                     <li class="nav-item">
-
                         <a
                             class="nav-link"
-                            href="<?= $siteRoot ?>/pages/about.php"
+                            href="<?= htmlspecialchars($siteRoot . '/pages/about.php', ENT_QUOTES, 'UTF-8') ?>"
                         >
                             About
                         </a>
-
                     </li>
 
-                    <li class="nav-item">
-
-    <a
-        class="nav-link"
-        href="<?= $siteRoot ?>/pages/team.php"
-    >
-        Team
-    </a>
-
-</li>
-
-
-                    <!-- CONTACT -->
 
                     <li class="nav-item">
-
                         <a
                             class="nav-link"
-                            href="<?= $siteRoot ?>/pages/contact.php"
+                            href="<?= htmlspecialchars($siteRoot . '/pages/team.php', ENT_QUOTES, 'UTF-8') ?>"
+                        >
+                            Team
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            href="<?= htmlspecialchars($siteRoot . '/pages/contact.php', ENT_QUOTES, 'UTF-8') ?>"
                         >
                             Contact
                         </a>
-
                     </li>
-
 
                 </ul>
 
 
-                <!-- SEARCH -->
-
                 <form
-                    action="<?= $siteRoot ?>/pages/products.php"
+                    action="<?= htmlspecialchars($siteRoot . '/pages/products.php', ENT_QUOTES, 'UTF-8') ?>"
                     method="get"
                     class="search-box"
                 >
@@ -236,115 +194,79 @@ $siteRoot = '/Final-Project';
                 </form>
 
 
-                <!-- USER / CART -->
-
                 <div class="header-icons">
-
 
                     <?php if ($authUser): ?>
 
-
-                        <!-- PROFILE -->
-
                         <a
-                            href="<?= $siteRoot ?>/pages/profile.php"
+                            href="<?= htmlspecialchars($siteRoot . '/pages/profile.php', ENT_QUOTES, 'UTF-8') ?>"
                             class="icon-button"
                             title="Profile"
                             aria-label="Profile"
                         >
-
                             <i class="bi bi-person"></i>
-
                         </a>
 
 
                         <?php if (($authUser['role'] ?? '') === 'admin'): ?>
 
-
-                            <!-- DASHBOARD -->
-
                             <a
-                                href="<?= $siteRoot ?>/dasboard/index.php"
+                                href="<?= htmlspecialchars($siteRoot . '/dasboard/index.php', ENT_QUOTES, 'UTF-8') ?>"
                                 class="icon-button"
                                 title="Dashboard"
                                 aria-label="Dashboard"
                             >
-
                                 <i class="bi bi-speedometer2"></i>
-
                             </a>
-
 
                         <?php else: ?>
 
-
-                            <!-- ORDERS -->
-
                             <a
-                                href="<?= $siteRoot ?>/pages/orders.php"
+                                href="<?= htmlspecialchars($siteRoot . '/pages/orders.php', ENT_QUOTES, 'UTF-8') ?>"
                                 class="icon-button"
                                 title="My Orders"
                                 aria-label="My Orders"
                             >
-
                                 <i class="bi bi-bag"></i>
-
                             </a>
-
 
                         <?php endif; ?>
 
 
-                        <!-- LOGOUT -->
-
                         <a
-                            href="<?= $siteRoot ?>/auth/logout.php"
+                            href="<?= htmlspecialchars($siteRoot . '/auth/logout.php', ENT_QUOTES, 'UTF-8') ?>"
                             class="icon-button"
                             title="Logout"
                             aria-label="Logout"
                         >
-
                             <i class="bi bi-box-arrow-right"></i>
-
                         </a>
 
 
                     <?php else: ?>
 
-
-                        <!-- LOGIN -->
-
                         <a
-                            href="<?= $siteRoot ?>/auth/login.php"
+                            href="<?= htmlspecialchars($siteRoot . '/auth/login.php', ENT_QUOTES, 'UTF-8') ?>"
                             class="icon-button"
                             title="Login"
                             aria-label="Login"
                         >
-
                             <i class="bi bi-person"></i>
-
                         </a>
-
 
                     <?php endif; ?>
 
 
-                    <!-- CART -->
-
                     <a
-                        href="<?= $siteRoot ?>/pages/cart.php"
+                        href="<?= htmlspecialchars($siteRoot . '/pages/cart.php', ENT_QUOTES, 'UTF-8') ?>"
                         class="icon-button"
                         title="Shopping Cart"
                         aria-label="Shopping Cart"
                     >
-
                         <i class="bi bi-cart3"></i>
-
                     </a>
 
-
                 </div>
-
 
             </div>
 
@@ -353,3 +275,23 @@ $siteRoot = '/Final-Project';
     </nav>
 
 </header>
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const promoBar = document.getElementById('promoBar');
+    const promoClose = document.getElementById('promoClose');
+
+    if (promoBar && promoClose) {
+
+        promoClose.addEventListener('click', function () {
+            promoBar.style.display = 'none';
+        });
+
+    }
+
+});
+
+</script>
