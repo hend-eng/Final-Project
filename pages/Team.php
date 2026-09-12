@@ -228,7 +228,7 @@ $teamMembers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     <p>
                         Our team members will appear here once
-                        they are added to SHOP.CO.
+                        they are added to SHOP.COo.
                     </p>
 
                 </div>
