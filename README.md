@@ -223,7 +223,7 @@ Orders / Profile
 
 ## 👨‍💼 Admin Flow
 
-```text
+```Text
 Admin Login
      ↓
 Dashboard
