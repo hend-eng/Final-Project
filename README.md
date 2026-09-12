@@ -60,7 +60,7 @@ The project was built using **HTML, CSS, JavaScript, PHP, MySQL, and Bootstrap**
 
 ## 📂 Project Structure
 
-```text
+```Text
 Final-Project/
 │
 ├── assets/
