@@ -141,7 +141,7 @@ Use a local development environment such as:
 ### 2. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/hend-eng/Final-Project.git
 ```
 
 ### 3. Move the Project
