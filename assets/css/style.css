@@ -24,108 +24,119 @@ select {
 
 .promo-bar {
   min-height: 30px;
-  padding: 5px 7%;
-
+  padding: 6px 7%;
   position: relative;
-
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-
   background: #000;
   color: #fff;
-
   font-size: 12px;
 }
 
 .promo-bar a {
+  margin-left: 5px;
   color: #fff;
   text-decoration: underline;
+}
+
+.promo-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .promo-close {
   position: absolute;
   right: 7%;
-
   padding: 0;
-
   border: 0;
   background: transparent;
-
   color: #fff;
-
   font-size: 16px;
   line-height: 1;
 }
 
 .site-header {
+  position: relative;
+  z-index: 1000;
   background: #fff;
   border-bottom: 1px solid #eee;
+}
+
+.site-header .navbar {
+  padding: 0;
 }
 
 .site-header .container-fluid {
   min-height: 70px;
   padding: 0 7%;
+  display: flex;
+  align-items: center;
 }
 
 .logo {
+  flex-shrink: 0;
   margin-right: 25px;
-
   color: #000 !important;
-
   font-size: 28px;
   font-weight: 900;
   letter-spacing: -1.5px;
+  line-height: 1;
+}
+
+.navbar-collapse {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
 }
 
 .nav-links {
   gap: 8px;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links .nav-link {
   padding: 8px;
-
   color: #000;
-
   font-size: 14px;
+  white-space: nowrap;
 }
 
-.nav-links .nav-link:hover {
+.nav-links .nav-link:hover,
+.nav-links .nav-link:focus {
   color: #555;
 }
 
 .search-box {
   width: 320px;
   height: 42px;
-
+  flex-shrink: 1;
   margin-left: auto;
   margin-right: 25px;
   padding: 0 16px;
-
   display: flex;
   align-items: center;
   gap: 9px;
-
   background: #f5f5f5;
   border-radius: 25px;
 }
 
 .search-icon {
+  flex-shrink: 0;
   color: #777;
   font-size: 16px;
-  cursor: pointer;
 }
 
 .search-input {
   width: 100%;
   min-width: 0;
-
+  padding: 0;
   border: 0;
   outline: 0;
-
   background: transparent;
-
   color: #000;
   font-size: 13px;
 }
@@ -135,6 +146,7 @@ select {
 }
 
 .header-icons {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 15px;
@@ -142,24 +154,27 @@ select {
 
 .icon-button {
   padding: 0;
-
   border: 0;
   background: transparent;
-
   color: #000;
-
   font-size: 20px;
   line-height: 1;
 }
 
-.icon-button:hover {
+.icon-button:hover,
+.icon-button:focus {
   color: #555;
 }
 
 .navbar-toggler {
-  padding: 0;
+  display: none;
+  padding: 6px;
   border: 0;
-  font-size: 22px;
+  border-radius: 6px;
+  color: #000;
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
 }
 
 .navbar-toggler:focus {
@@ -173,13 +188,10 @@ select {
 
 .mobile-search-box {
   height: 42px;
-
   padding: 0 14px;
-
   display: flex;
   align-items: center;
   gap: 8px;
-
   background: #f5f5f5;
   border-radius: 25px;
 }
@@ -247,27 +259,6 @@ select {
   margin: 0 auto;
 }
 
-.hero-spark {
-  position: absolute;
-
-  color: #000;
-  line-height: 1;
-}
-
-.hero-spark-large {
-  top: 15%;
-  right: 2%;
-
-  font-size: 55px;
-}
-
-.hero-spark-small {
-  top: 45%;
-  left: 5%;
-
-  font-size: 30px;
-}
-
 .hero-stats {
   display: flex;
   flex-wrap: wrap;
@@ -297,20 +288,69 @@ select {
 /* Brands */
 
 .brands-section {
-  padding: 25px 5%;
-
+  width: 100%;
+  height: 75px;
+  overflow: hidden;
   background: #000;
   color: #fff;
 }
 
-.brand-name {
-  display: block;
+.brands-marquee {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
 
-  text-align: center;
+.brands-marquee-track {
+  width: max-content;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  animation: brandsMarquee 22s linear infinite;
+  will-change: transform;
+}
+
+.brands-marquee-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.marquee-brand {
+  min-width: 220px;
+  padding: 0 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  font-size: clamp(25px, 3vw, 40px);
+  font-weight: 700;
   white-space: nowrap;
+}
 
-  font-size: clamp(18px, 3vw, 30px);
-  font-weight: 600;
+.marquee-brand:hover,
+.marquee-brand:focus {
+  color: #fff;
+  text-decoration: none;
+}
+
+@keyframes brandsMarquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brands-marquee-track {
+    animation: none;
+  }
 }
 
 /* Product Sections */
@@ -640,36 +680,6 @@ select {
   min-width: 0;
 
   font-size: 13px;
-}
-
-.newsletter-form .btn {
-  min-height: 44px;
-
-  border-radius: 25px;
-
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.footer-main {
-  padding: 35px 0 45px;
-}
-
-.footer-brand h3 {
-  margin-bottom: 15px;
-
-  font-size: 25px;
-  font-weight: 900;
-}
-
-.footer-brand p {
-  max-width: 270px;
-  margin-bottom: 20px;
-
-  color: #666;
-
-  font-size: 13px;
-  line-height: 1.6;
 }
 
 .social-icons a {
@@ -1593,18 +1603,123 @@ select {
 
 /* Tablet */
 
-@media (max-width: 991.98px) {
+@media (max-width: 1199.98px) and (min-width: 992px) {
   .site-header .container-fluid {
     padding: 0 4%;
   }
 
   .logo {
+    margin-right: 18px;
     font-size: 25px;
   }
 
+  .nav-links {
+    gap: 2px;
+  }
+
+  .nav-links .nav-link {
+    padding: 7px 5px;
+    font-size: 13px;
+  }
+
   .search-box {
-    width: 240px;
+    width: 220px;
     margin-right: 15px;
+    padding: 0 13px;
+  }
+
+  .header-icons {
+    gap: 12px;
+  }
+
+  .hero {
+    padding-top: 45px;
+  }
+
+  .hero h1 {
+    font-size: 45px;
+  }
+
+  .product-image,
+  #category-products .product-image {
+    height: 230px;
+  }
+
+  .dress-style-box {
+    padding: 30px;
+  }
+
+  .product-main-image {
+    height: 380px;
+  }
+}
+
+/* Collapsed Navbar / Tablet + Mobile */
+
+@media (max-width: 991.98px) {
+  .site-header .container-fluid {
+    min-height: 64px;
+    padding: 0 4%;
+    flex-wrap: wrap;
+  }
+
+  .navbar-toggler {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 12px;
+  }
+
+  .logo {
+    margin-right: 0;
+    font-size: 25px;
+  }
+
+  .navbar-collapse:not(.show) {
+    display: none !important;
+  }
+
+  .navbar-collapse.show {
+    width: 100%;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px 0 16px;
+  }
+
+  .nav-links {
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-links .nav-item {
+    width: 100%;
+  }
+
+  .nav-links .nav-link {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 15px;
+  }
+
+  .search-box {
+    width: 100%;
+    height: 42px;
+    margin: 12px 0;
+    padding: 0 15px;
+  }
+
+  .header-icons {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 18px;
+    padding-top: 3px;
+  }
+
+  .icon-button {
+    font-size: 19px;
   }
 
   .hero {
@@ -1634,10 +1749,12 @@ select {
 @media (max-width: 767.98px) {
   .promo-bar {
     min-height: 32px;
-
-    padding: 6px 45px 6px 15px;
-
+    padding: 7px 15px;
     font-size: 10px;
+  }
+
+  .promo-content {
+    width: 100%;
   }
 
   .promo-close {
@@ -1646,18 +1763,36 @@ select {
 
   .site-header .container-fluid {
     min-height: 58px;
-
     padding: 0 18px;
   }
 
-  .logo {
-    margin: 0;
+  .navbar-toggler {
+    margin-right: 10px;
+    padding: 5px;
+    font-size: 23px;
+  }
 
+  .logo {
     font-size: 24px;
   }
 
+  .navbar-collapse.show {
+    padding-top: 8px;
+    padding-bottom: 14px;
+  }
+
+  .nav-links .nav-link {
+    padding: 9px 0;
+    font-size: 14px;
+  }
+
+  .search-box {
+    height: 42px;
+    margin: 10px 0 12px;
+  }
+
   .header-icons {
-    gap: 13px;
+    gap: 16px;
   }
 
   .icon-button {
@@ -1670,14 +1805,12 @@ select {
 
   .hero h1 {
     margin-bottom: 18px;
-
     font-size: 38px;
     letter-spacing: -1px;
   }
 
   .hero p {
     margin-bottom: 22px;
-
     font-size: 13px;
   }
 
@@ -1687,7 +1820,6 @@ select {
 
   .hero-stats {
     gap: 20px;
-
     margin-top: 30px;
   }
 
@@ -1712,11 +1844,17 @@ select {
   }
 
   .brands-section {
-    padding: 20px 15px;
+    height: 65px;
   }
 
-  .brand-name {
-    font-size: 18px;
+  .marquee-brand {
+    min-width: 150px;
+    padding: 0 20px;
+    font-size: 22px;
+  }
+
+  .brands-marquee-track {
+    animation-duration: 16s;
   }
 
   .products-section,
@@ -1727,7 +1865,6 @@ select {
 
   .section-title {
     margin-bottom: 25px;
-
     font-size: 26px;
   }
 
@@ -1737,7 +1874,6 @@ select {
 
   .product-card h3 {
     margin-top: 8px;
-
     font-size: 12px;
   }
 
@@ -1759,7 +1895,6 @@ select {
 
   .dress-style-box {
     padding: 25px 18px;
-
     border-radius: 20px;
   }
 
@@ -1770,7 +1905,6 @@ select {
   .dress-style-card span {
     top: 18px;
     left: 18px;
-
     font-size: 18px;
   }
 
@@ -1780,34 +1914,9 @@ select {
 
   .review-card {
     min-height: 160px;
-
     padding: 18px;
   }
 
-  .newsletter {
-    padding: 30px 0;
-  }
-
-  .newsletter-content {
-    padding: 25px 20px !important;
-
-    border-radius: 18px !important;
-  }
-
-  .newsletter h2 {
-    font-size: 24px;
-  }
-
-  .footer-main {
-    padding: 30px 0;
-  }
-
-  .footer-brand {
-    margin-bottom: 10px;
-  }
-
-  .footer-bottom {
-    text-align: center;
   }
 
   /* Product */
@@ -1823,20 +1932,17 @@ select {
   .product-thumbnails {
     flex-direction: row;
     gap: 8px;
-
     overflow-x: auto;
   }
 
   .product-thumbnail {
     width: 75px;
     height: 75px;
-
     flex-shrink: 0;
   }
 
   .product-main-image {
     height: 330px;
-
     margin-bottom: 25px;
   }
 
@@ -1859,7 +1965,6 @@ select {
   .quantity-control button {
     width: 24px;
     height: 24px;
-
     font-size: 13px;
   }
 
@@ -1907,7 +2012,6 @@ select {
 
   .category-sort {
     width: 100%;
-
     justify-content: space-between;
   }
 
@@ -1918,31 +2022,22 @@ select {
   .category-sort .form-select {
     width: 180px;
     height: 38px;
-
     font-size: 11px;
   }
 
   .filters {
     position: fixed;
-
     top: 0;
     left: 0;
     z-index: 1055;
-
     width: min(320px, 88vw);
     height: 100vh;
-
     overflow-y: auto;
-
     padding: 22px;
-
     border: 0;
     border-radius: 0;
-
     box-shadow: 8px 0 25px rgba(0, 0, 0, 0.15);
-
     transform: translateX(-105%);
-
     transition: transform 0.25s ease;
   }
 
@@ -1952,12 +2047,9 @@ select {
 
   body.filters-open::after {
     content: "";
-
     position: fixed;
     inset: 0;
-
     z-index: 1050;
-
     background: rgba(0, 0, 0, 0.35);
   }
 
@@ -1983,15 +2075,12 @@ select {
 
   .category-pagination {
     margin-top: 35px;
-
     gap: 8px;
   }
 
   .category-pagination > button {
     min-width: auto;
-
     padding: 8px 10px;
-
     font-size: 10px;
   }
 
@@ -2002,7 +2091,6 @@ select {
   .pagination-numbers .btn {
     min-width: 30px;
     height: 30px;
-
     font-size: 10px;
   }
 
@@ -2019,15 +2107,12 @@ select {
 
   .cart-title {
     margin-bottom: 18px;
-
     font-size: 25px;
   }
 
   .cart-item {
     min-height: 120px;
-
     padding: 12px;
-
     gap: 12px;
   }
 
@@ -2046,7 +2131,6 @@ select {
 
   .cart-item-info p {
     margin-top: 2px;
-
     font-size: 9px;
   }
 
@@ -2098,10 +2182,9 @@ select {
 
   .checkout-button {
     height: 40px;
-
     font-size: 11px;
   }
-}
+
 
 /* Small Mobile */
 
@@ -2375,4 +2458,1820 @@ select {
   .auth-card {
     padding: 30px 22px;
   }
+}
+/* =========================================================
+   PROMO BAR
+========================================================= */
+
+.promo-bar {
+    position: relative;
+    width: 100%;
+    min-height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 6px 60px 6px 20px;
+
+    background: #000;
+    color: #fff;
+
+    font-size: 12px;
+}
+
+.promo-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.promo-content span {
+    color: #fff;
+}
+
+.promo-content a {
+    margin-left: 5px;
+
+    color: #fff;
+    text-decoration: underline;
+}
+
+.promo-content a:hover {
+    color: #ccc;
+}
+
+
+/* Close button */
+
+.promo-close {
+    position: absolute;
+    top: 50%;
+    right: 18px;
+
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+    color: #fff;
+
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transform: translateY(-50%);
+}
+
+.promo-close:hover {
+    opacity: 0.65;
+}
+
+
+/* Mobile */
+
+@media (max-width: 767.98px) {
+
+    .promo-bar {
+        min-height: 32px;
+        padding: 7px 40px 7px 12px;
+
+        font-size: 10px;
+    }
+
+    .promo-content {
+        width: 100%;
+    }
+
+    .promo-close {
+        right: 8px;
+
+        width: 24px;
+        height: 24px;
+
+        font-size: 18px;
+    }
+
+}
+/* =========================================================
+   ABOUT PAGE
+========================================================= */
+
+.about-page {
+    width: 100%;
+    background: #fff;
+    color: #000;
+}
+
+
+/* =========================================================
+   ABOUT HERO
+========================================================= */
+
+.about-hero {
+    padding: 35px 0 85px;
+    background: #f5f5f5;
+}
+
+.about-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 70px;
+    font-size: 13px;
+}
+
+.about-breadcrumb a {
+    color: #000;
+    text-decoration: none;
+}
+
+.about-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.about-breadcrumb i {
+    font-size: 11px;
+    color: #777;
+}
+
+.about-breadcrumb span {
+    color: #777;
+}
+
+.about-hero-content {
+    max-width: 800px;
+}
+
+.about-label {
+    display: inline-block;
+    margin-bottom: 18px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.about-hero h1 {
+    margin: 0 0 25px;
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 900;
+    line-height: .95;
+    letter-spacing: -4px;
+}
+
+.about-hero-content p {
+    max-width: 600px;
+    margin: 0;
+    color: #555;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   OUR STORY
+========================================================= */
+
+.about-story {
+    padding: 100px 0;
+}
+
+.about-story-visual {
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #f1f1f1;
+}
+
+.about-story-card {
+    width: 70%;
+    min-height: 330px;
+    padding: 45px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: #000;
+    color: #fff;
+}
+
+.about-story-card span {
+    margin-bottom: 35px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.about-story-card strong {
+    font-size: clamp(30px, 4vw, 52px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+.about-content {
+    max-width: 550px;
+}
+
+.about-content h2 {
+    margin: 0 0 25px;
+    font-size: clamp(38px, 5vw, 60px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+.about-content p {
+    margin-bottom: 18px;
+    color: #555;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   OUR MISSION
+========================================================= */
+
+.about-mission {
+    padding: 100px 0;
+    background: #000;
+    color: #fff;
+    text-align: center;
+}
+
+.about-mission-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-mission .about-label {
+    color: #fff;
+}
+
+.about-mission h2 {
+    margin: 0 0 25px;
+    font-size: clamp(42px, 6vw, 72px);
+    font-weight: 900;
+    line-height: .98;
+    letter-spacing: -3px;
+}
+
+.about-mission p {
+    max-width: 620px;
+    margin: 0 auto;
+    color: #ccc;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   VALUES
+========================================================= */
+
+.about-values {
+    padding: 100px 0;
+}
+
+.about-section-heading {
+    margin-bottom: 50px;
+}
+
+.about-section-heading h2 {
+    margin: 0;
+    font-size: clamp(38px, 5vw, 60px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+.about-value-card {
+    height: 100%;
+    padding: 35px;
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.about-value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+}
+
+.about-value-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #000;
+    color: #fff;
+
+    font-size: 20px;
+}
+
+.about-value-card h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.about-value-card p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   ABOUT STATS
+========================================================= */
+
+.about-stats {
+    padding: 65px 0;
+    background: #f5f5f5;
+}
+
+.about-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-stat strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: clamp(30px, 4vw, 48px);
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+.about-stat span {
+    color: #666;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   ABOUT CTA
+========================================================= */
+
+.about-cta {
+    padding: 110px 0;
+    text-align: center;
+}
+
+.about-cta-content {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.about-cta h2 {
+    margin: 0 0 25px;
+    font-size: clamp(42px, 6vw, 72px);
+    font-weight: 900;
+    line-height: .98;
+    letter-spacing: -3px;
+}
+
+.about-cta p {
+    max-width: 550px;
+    margin: 0 auto 30px;
+    color: #666;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.about-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 170px;
+    padding: 14px 30px;
+
+    background: #000;
+    color: #fff;
+
+    border: 1px solid #000;
+    border-radius: 30px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+.about-cta-button:hover {
+    background: #fff;
+    color: #000;
+}
+
+
+/* =========================================================
+   ABOUT — TABLET
+========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .about-hero {
+        padding-bottom: 65px;
+    }
+
+    .about-breadcrumb {
+        margin-bottom: 50px;
+    }
+
+    .about-story,
+    .about-values {
+        padding: 75px 0;
+    }
+
+    .about-mission {
+        padding: 80px 0;
+    }
+
+    .about-story-visual {
+        min-height: 380px;
+    }
+
+    .about-story-card {
+        min-height: 280px;
+        padding: 35px;
+    }
+
+}
+
+
+/* =========================================================
+   ABOUT — MOBILE
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .about-hero {
+        padding: 25px 0 55px;
+    }
+
+    .about-breadcrumb {
+        margin-bottom: 40px;
+        font-size: 12px;
+    }
+
+    .about-hero h1 {
+        margin-bottom: 20px;
+        font-size: 48px;
+        letter-spacing: -2px;
+    }
+
+    .about-hero-content p {
+        font-size: 14px;
+    }
+
+
+    .about-story {
+        padding: 60px 0;
+    }
+
+    .about-story-visual {
+        min-height: 300px;
+    }
+
+    .about-story-card {
+        width: 80%;
+        min-height: 230px;
+        padding: 25px;
+    }
+
+    .about-story-card span {
+        margin-bottom: 25px;
+        font-size: 13px;
+    }
+
+    .about-story-card strong {
+        font-size: 32px;
+    }
+
+    .about-content {
+        margin-top: 10px;
+    }
+
+    .about-content h2 {
+        font-size: 40px;
+        letter-spacing: -1.5px;
+    }
+
+    .about-content p {
+        font-size: 14px;
+    }
+
+
+    .about-mission {
+        padding: 65px 0;
+    }
+
+    .about-mission h2 {
+        font-size: 42px;
+        letter-spacing: -2px;
+    }
+
+    .about-mission p {
+        font-size: 14px;
+    }
+
+
+    .about-values {
+        padding: 60px 0;
+    }
+
+    .about-section-heading {
+        margin-bottom: 35px;
+    }
+
+    .about-section-heading h2 {
+        font-size: 40px;
+        letter-spacing: -1.5px;
+    }
+
+    .about-value-card {
+        padding: 25px;
+    }
+
+
+    .about-stats {
+        padding: 50px 0;
+    }
+
+    .about-stat strong {
+        font-size: 32px;
+    }
+
+
+    .about-cta {
+        padding: 70px 0;
+    }
+
+    .about-cta h2 {
+        font-size: 42px;
+        letter-spacing: -2px;
+    }
+
+}
+/* =========================================================
+   CONTACT PAGE
+========================================================= */
+
+.contact-page {
+    width: 100%;
+    background: #fff;
+    color: #000;
+}
+
+
+/* =========================================================
+   CONTACT HERO
+========================================================= */
+
+.contact-hero {
+    padding: 35px 0 85px;
+    background: #f5f5f5;
+}
+
+.contact-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 70px;
+    font-size: 13px;
+}
+
+.contact-breadcrumb a {
+    color: #000;
+    text-decoration: none;
+}
+
+.contact-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.contact-breadcrumb i {
+    color: #777;
+    font-size: 11px;
+}
+
+.contact-breadcrumb span {
+    color: #777;
+}
+
+.contact-hero-content {
+    max-width: 800px;
+}
+
+.contact-label {
+    display: inline-block;
+    margin-bottom: 18px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.contact-hero h1 {
+    margin: 0 0 25px;
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 900;
+    line-height: .95;
+    letter-spacing: -4px;
+}
+
+.contact-hero-content p {
+    max-width: 600px;
+    margin: 0;
+    color: #555;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CONTACT MAIN
+========================================================= */
+
+.contact-main {
+    padding: 100px 0;
+}
+
+.contact-info {
+    max-width: 500px;
+}
+
+.contact-info h2 {
+    margin: 0 0 20px;
+    font-size: clamp(40px, 5vw, 60px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+.contact-info-intro {
+    margin-bottom: 40px;
+    color: #666;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   CONTACT INFO ITEMS
+========================================================= */
+
+.contact-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.contact-info-icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #000;
+    color: #fff;
+
+    font-size: 18px;
+}
+
+.contact-info-item > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.contact-info-item span {
+    color: #777;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+}
+
+.contact-info-item a {
+    color: #000;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.contact-info-item a:hover {
+    text-decoration: underline;
+}
+
+.contact-info-item p {
+    margin: 0;
+    color: #000;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   CONTACT FORM
+========================================================= */
+
+.contact-form-wrapper {
+    padding: 45px;
+    background: #f5f5f5;
+}
+
+.contact-form-wrapper h2 {
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.contact-form-wrapper > p {
+    margin-bottom: 35px;
+    color: #666;
+    font-size: 14px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.contact-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.contact-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contact-field label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.contact-field input,
+.contact-field textarea {
+    width: 100%;
+    padding: 14px 16px;
+
+    border: 1px solid #d8d8d8;
+    border-radius: 4px;
+
+    background: #fff;
+    color: #000;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.contact-field input {
+    height: 50px;
+}
+
+.contact-field textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+    border-color: #000;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, .08);
+}
+
+.contact-field input::placeholder,
+.contact-field textarea::placeholder {
+    color: #999;
+}
+
+
+/* =========================================================
+   CONTACT SUBMIT
+========================================================= */
+
+.contact-submit {
+    min-height: 52px;
+    padding: 14px 25px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    border: 1px solid #000;
+    border-radius: 30px;
+
+    background: #000;
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+.contact-submit:hover {
+    background: #fff;
+    color: #000;
+}
+
+.contact-form-note {
+    margin: 0;
+    color: #777;
+    font-size: 12px;
+}
+
+.contact-form-note.is-success {
+    color: #000;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   HELP SECTION
+========================================================= */
+
+.contact-help {
+    padding: 100px 0;
+    background: #fff;
+}
+
+.contact-section-heading {
+    margin-bottom: 50px;
+}
+
+.contact-section-heading h2 {
+    margin: 0;
+    font-size: clamp(38px, 5vw, 60px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+.contact-help-card {
+    height: 100%;
+    padding: 35px;
+
+    border: 1px solid #e5e5e5;
+    background: #fff;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.contact-help-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+}
+
+.contact-help-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #000;
+    color: #fff;
+
+    font-size: 19px;
+}
+
+.contact-help-card h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.contact-help-card p {
+    min-height: 72px;
+    margin-bottom: 20px;
+
+    color: #666;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.contact-help-card a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #000;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.contact-help-card a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   CONTACT CTA
+========================================================= */
+
+.contact-cta {
+    padding: 100px 0;
+    background: #000;
+    color: #fff;
+    text-align: center;
+}
+
+.contact-cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.contact-cta h2 {
+    margin-bottom: 18px;
+
+    font-size: clamp(40px, 5vw, 60px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+.contact-cta p {
+    margin-bottom: 30px;
+    color: #ccc;
+    font-size: 15px;
+}
+
+.contact-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 190px;
+    padding: 14px 28px;
+
+    border: 1px solid #fff;
+    border-radius: 30px;
+
+    background: #fff;
+    color: #000;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+.contact-cta-button:hover {
+    background: #000;
+    color: #fff;
+}
+
+
+/* =========================================================
+   CONTACT — TABLET
+========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .contact-hero {
+        padding-bottom: 65px;
+    }
+
+    .contact-breadcrumb {
+        margin-bottom: 50px;
+    }
+
+    .contact-main,
+    .contact-help {
+        padding: 75px 0;
+    }
+
+    .contact-form-wrapper {
+        padding: 35px;
+    }
+
+    .contact-cta {
+        padding: 80px 0;
+    }
+
+}
+
+
+/* =========================================================
+   CONTACT — MOBILE
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .contact-hero {
+        padding: 25px 0 55px;
+    }
+
+    .contact-breadcrumb {
+        margin-bottom: 40px;
+        font-size: 12px;
+    }
+
+    .contact-hero h1 {
+        font-size: 48px;
+        letter-spacing: -2px;
+    }
+
+    .contact-hero-content p {
+        font-size: 14px;
+    }
+
+
+    .contact-main {
+        padding: 60px 0;
+    }
+
+    .contact-info {
+        max-width: none;
+    }
+
+    .contact-info h2 {
+        font-size: 40px;
+        letter-spacing: -1.5px;
+    }
+
+
+    .contact-form-wrapper {
+        padding: 25px 20px;
+    }
+
+    .contact-form-row {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+
+    .contact-help {
+        padding: 60px 0;
+    }
+
+    .contact-section-heading {
+        margin-bottom: 35px;
+    }
+
+    .contact-section-heading h2 {
+        font-size: 40px;
+        letter-spacing: -1.5px;
+    }
+
+    .contact-help-card {
+        padding: 25px;
+    }
+
+
+    .contact-cta {
+        padding: 70px 0;
+    }
+
+    .contact-cta h2 {
+        font-size: 42px;
+        letter-spacing: -2px;
+    }
+
+}
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.site-footer {
+    width: 100%;
+    background: #f5f5f5;
+    color: #000;
+}
+
+
+/* =========================================================
+   FOOTER MAIN
+========================================================= */
+
+.footer-main {
+    display: grid;
+    grid-template-columns: 2fr repeat(4, 1fr);
+    gap: 50px;
+    padding: 70px 0 60px;
+}
+
+
+/* =========================================================
+   FOOTER BRAND
+========================================================= */
+
+.footer-brand {
+    max-width: 300px;
+}
+
+.footer-logo {
+    display: inline-block;
+    margin-bottom: 20px;
+
+    color: #000;
+
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+
+    text-decoration: none;
+}
+
+.footer-brand p {
+    max-width: 280px;
+    margin: 0 0 25px;
+
+    color: #666;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FOOTER SOCIALS
+========================================================= */
+
+.footer-socials {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-social {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #d5d5d5;
+    border-radius: 50%;
+
+    background: #fff;
+    color: #000;
+
+    font-size: 15px;
+
+    text-decoration: none;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+.footer-social:hover {
+    background: #000;
+    color: #fff;
+}
+
+
+/* =========================================================
+   FOOTER COLUMNS
+========================================================= */
+
+.footer-column h3 {
+    margin: 5px 0 22px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+.footer-column ul {
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.footer-column li {
+    margin-bottom: 14px;
+}
+
+.footer-column a {
+    color: #666;
+
+    font-size: 14px;
+
+    text-decoration: none;
+
+    transition:
+        color .2s ease;
+}
+
+.footer-column a:hover {
+    color: #000;
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM
+========================================================= */
+
+.footer-bottom {
+    border-top: 1px solid #ddd;
+}
+
+.footer-bottom .container {
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+}
+
+.footer-bottom p {
+    margin: 0;
+
+    color: #666;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   FOOTER — TABLET
+========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .footer-main {
+        grid-template-columns: 2fr repeat(2, 1fr);
+        gap: 40px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+        max-width: 400px;
+    }
+
+}
+
+
+/* =========================================================
+   FOOTER — MOBILE
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .footer-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px 25px;
+
+        padding: 50px 0 40px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .footer-logo {
+        font-size: 28px;
+    }
+
+    .footer-column h3 {
+        margin-bottom: 18px;
+        font-size: 12px;
+    }
+
+    .footer-column li {
+        margin-bottom: 11px;
+    }
+
+    .footer-column a {
+        font-size: 13px;
+    }
+
+    .footer-bottom .container {
+        min-height: 60px;
+    }
+
+    .footer-bottom p {
+        font-size: 12px;
+    }
+
+
+}
+/* =========================================================
+   TEAM PAGE
+========================================================= */
+
+.team-page {
+    width: 100%;
+    background: #fff;
+    color: #000;
+}
+
+
+/* =========================================================
+   TEAM HERO
+========================================================= */
+
+.team-hero {
+    padding: 35px 0 85px;
+    background: #f5f5f5;
+}
+
+.team-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 70px;
+
+    font-size: 13px;
+}
+
+.team-breadcrumb a {
+    color: #000;
+    text-decoration: none;
+}
+
+.team-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.team-breadcrumb i {
+    color: #777;
+    font-size: 11px;
+}
+
+.team-breadcrumb span {
+    color: #777;
+}
+
+.team-hero-content {
+    max-width: 800px;
+}
+
+.team-label {
+    display: inline-block;
+
+    margin-bottom: 18px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.team-hero h1 {
+    margin: 0 0 25px;
+
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 900;
+
+    line-height: .95;
+    letter-spacing: -4px;
+}
+
+.team-hero-content p {
+    max-width: 600px;
+
+    margin: 0;
+
+    color: #555;
+
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   TEAM INTRO
+========================================================= */
+
+.team-intro {
+    padding: 100px 0;
+}
+
+.team-intro-content {
+    max-width: 750px;
+}
+
+.team-intro h2 {
+    margin: 0 0 25px;
+
+    font-size: clamp(42px, 5vw, 64px);
+    font-weight: 900;
+
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+.team-intro p {
+    max-width: 650px;
+
+    margin: 0;
+
+    color: #666;
+
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   TEAM MEMBERS
+========================================================= */
+
+.team-members {
+    padding: 0 0 100px;
+}
+
+
+/* =========================================================
+   TEAM CARD
+========================================================= */
+
+.team-card {
+    height: 100%;
+
+    overflow: hidden;
+
+    border: 1px solid #e5e5e5;
+
+    background: #fff;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, .08);
+}
+
+
+/* =========================================================
+   TEAM IMAGE
+========================================================= */
+
+.team-avatar {
+    width: 100%;
+    height: 300px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #f1f1f1;
+
+    color: #000;
+
+    font-size: 70px;
+}
+
+.team-avatar img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.team-avatar i {
+    font-size: 70px;
+}
+
+
+/* =========================================================
+   TEAM CARD CONTENT
+========================================================= */
+
+.team-card-content {
+    padding: 30px;
+}
+
+.team-role {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #777;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+.team-card h3 {
+    margin: 0 0 12px;
+
+    font-size: 24px;
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+.team-card p {
+    margin: 0;
+
+    color: #666;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   EMPTY TEAM STATE
+========================================================= */
+
+.team-empty {
+    min-height: 320px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px;
+
+    border: 1px solid #e5e5e5;
+
+    background: #f8f8f8;
+
+    text-align: center;
+}
+
+.team-empty-icon {
+    width: 70px;
+    height: 70px;
+
+    margin-bottom: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #000;
+    color: #fff;
+
+    font-size: 28px;
+}
+
+.team-empty h2 {
+    margin-bottom: 12px;
+
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.team-empty p {
+    max-width: 500px;
+
+    margin: 0;
+
+    color: #666;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   TEAM CTA
+========================================================= */
+
+.team-cta {
+    padding: 100px 0;
+
+    background: #000;
+    color: #fff;
+
+    text-align: center;
+}
+
+.team-cta-content {
+    max-width: 750px;
+
+    margin: 0 auto;
+}
+
+.team-cta .team-label {
+    color: #fff;
+}
+
+.team-cta h2 {
+    margin: 0 0 30px;
+
+    font-size: clamp(42px, 6vw, 68px);
+    font-weight: 900;
+
+    line-height: .98;
+    letter-spacing: -3px;
+}
+
+.team-cta-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 170px;
+
+    padding: 14px 30px;
+
+    border: 1px solid #fff;
+    border-radius: 30px;
+
+    background: #fff;
+    color: #000;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background .2s ease,
+        color .2s ease;
+}
+
+.team-cta-button:hover {
+    background: #000;
+    color: #fff;
+}
+
+
+/* =========================================================
+   TEAM — TABLET
+========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .team-hero {
+        padding-bottom: 65px;
+    }
+
+    .team-breadcrumb {
+        margin-bottom: 50px;
+    }
+
+    .team-intro {
+        padding: 75px 0;
+    }
+
+    .team-members {
+        padding-bottom: 75px;
+    }
+
+    .team-avatar {
+        height: 260px;
+    }
+
+    .team-cta {
+        padding: 80px 0;
+    }
+
+}
+
+
+/* =========================================================
+   TEAM — MOBILE
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .team-hero {
+        padding: 25px 0 55px;
+    }
+
+    .team-breadcrumb {
+        margin-bottom: 40px;
+
+        font-size: 12px;
+    }
+
+    .team-hero h1 {
+        font-size: 48px;
+
+        letter-spacing: -2px;
+    }
+
+    .team-hero-content p {
+        font-size: 14px;
+    }
+
+
+    .team-intro {
+        padding: 60px 0;
+    }
+
+    .team-intro h2 {
+        font-size: 42px;
+
+        letter-spacing: -1.5px;
+    }
+
+
+    .team-members {
+        padding-bottom: 60px;
+    }
+
+    .team-avatar {
+        height: 230px;
+    }
+
+    .team-card-content {
+        padding: 25px;
+    }
+
+
+    .team-empty {
+        min-height: 280px;
+
+        padding: 35px 20px;
+    }
+
+    .team-empty h2 {
+        font-size: 24px;
+    }
+
+
+    .team-cta {
+        padding: 70px 0;
+    }
+
+    .team-cta h2 {
+        font-size: 42px;
+
+        letter-spacing: -2px;
+    }
+
 }

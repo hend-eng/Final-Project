@@ -121,7 +121,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </span>
 
                 <?php if ($user['role'] === 'admin'): ?>
-                  <a href="<?= htmlspecialchars($basePath) ?>/dasboard/index.php" class="btn btn-dark w-100 mt-3">Go to Dashboard</a>
+                  <a href="<?= htmlspecialchars($basePath) ?>/dasboard/categories/index.php"
+   class="btn btn-dark w-100 mt-3">
+    Go to Dashboard
+</a>
                 <?php endif; ?>
 
                 <a href="<?= htmlspecialchars($basePath) ?>/auth/logout.php" class="btn btn-light w-100 mt-2">Logout</a>
